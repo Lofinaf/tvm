@@ -9,9 +9,22 @@ void tvm::vm_runtime::readbypos() {
 }
 
 void tvm::vm_runtime::readsource() {
+	position = 0;
 	while (!is_end()) {
 		readbypos();
 		position+=1;
+	}
+}
+
+opcodes tvm::vm_runtime::to_manual() {
+	string wordresult = "";
+	while(peek() != ' ') {
+		goto_tonext();
+		wordresult += peek();
+	}
+	iterator = 
+	if () {
+		
 	}
 }
 
@@ -27,3 +40,8 @@ void tvm::vm_runtime::goto_tonext() {
 	if (is_end()) return;
 	position+=1;
 }
+
+tvm::vm_runtime::vm_runtime(string src) {
+	source = src;
+}
+

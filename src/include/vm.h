@@ -1,6 +1,10 @@
+#include<stack>
 #include<string>
+#include<map>
 
+using std::map;
 using std::string;
+using std::stack;
 
 #ifndef MAX
 #define MAX sizeof(uint64_t)
@@ -16,7 +20,14 @@ typedef enum {
 namespace tvm {
 	
 	class environment {
-		uint64_t memory[MAX];
+		public:
+			uint64_t memory[MAX];
+			stack<short> st;
+			map<string, opcodes> wordmanual = {
+				{"goto", opcodes::OP_PUSH},
+				{".print", opcodes::OP_PRINT},
+				{"lab", opcodes::OP_LABEL_DEFINE}
+			};
 	};
 	
 	class vm_runtime {
@@ -31,6 +42,8 @@ namespace tvm {
 			void goto_tonext();
 			void readbypos();
 			void readsource();
+
+			opcodes to_manual();
 			
 			environment env;
 			vm_runtime(string source);
