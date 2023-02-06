@@ -2,12 +2,19 @@
 #include<string>
 #include<map>
 
+// C headers
+#include<stdio.h>
+
 using std::map;
 using std::string;
 using std::stack;
 
 #ifndef MAX
 #define MAX sizeof(uint64_t)
+#endif
+
+#ifndef ENV
+#define ENV env.wordmanual
 #endif
 
 typedef enum {
@@ -42,6 +49,10 @@ namespace tvm {
 			void goto_tonext();
 			void readbypos();
 			void readsource();
+
+			void systemcall(int id);
+			// Handling Manuals
+			void m_print();
 
 			opcodes to_manual();
 			
