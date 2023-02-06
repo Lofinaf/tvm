@@ -19,8 +19,10 @@ using std::stack;
 
 typedef enum {
 	OP_PUSH,
+	OP_POP,
 	OP_PRINT,
-	OP_LABEL_DEFINE
+	OP_PRINTST,
+	OP_LABEL_DEFINE,
 	// abstract enum, need to add some opcodes
 } opcodes;
 
@@ -32,8 +34,13 @@ namespace tvm {
 			stack<short> st;
 			map<string, opcodes> wordmanual = {
 				{"goto", opcodes::OP_PUSH},
-				{".print", opcodes::OP_PRINT},
-				{"lab", opcodes::OP_LABEL_DEFINE}
+				{"jump", opcodes::OP_PUSH},
+				{"jmp", opcodes::OP_PUSH},
+				{"print", opcodes::OP_PRINT},
+				{"printst", opcodes::OP_PRINTST},
+				{"push", opcodes::OP_PUSH},
+				{"pop", opcodes::OP_POP},
+				{"Label", opcodes::OP_LABEL_DEFINE}
 			};
 	};
 	
@@ -53,6 +60,8 @@ namespace tvm {
 			void systemcall(int id);
 			// Handling Manuals
 			void m_print();
+			void m_push();
+			void m_pop();
 
 			opcodes to_manual();
 			

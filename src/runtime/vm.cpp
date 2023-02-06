@@ -5,7 +5,17 @@ void tvm::vm_runtime::readbypos() {
 	
 	switch (opcode) {
 		case opcodes::OP_PRINT: systemcall(4381); break;
+		case opcodes::OP_PUSH: m_push(); break;
 	}
+}
+
+void tvm::vm_runtime::m_push() {
+	string literal = "";
+	while(peek() != ';') {
+		goto_tonext();
+		literal += peek();
+	}
+	env.st.push(literal);
 }
 
 void tvm::vm_runtime::m_print() {
@@ -20,6 +30,7 @@ void tvm::vm_runtime::m_print() {
 void tvm::vm_runtime::systemcall(int id) {
 	switch (id) {
 		case 4381:
+			goto_tonext();
 			m_print();
 			break;
 	}
