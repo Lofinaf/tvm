@@ -31,7 +31,7 @@ namespace tvm {
 	class environment {
 		public:
 			uint64_t memory[MAX];
-			stack<short> st;
+			stack<string> st;
 			map<string, opcodes> wordmanual = {
 				{"goto", opcodes::OP_PUSH},
 				{"jump", opcodes::OP_PUSH},
